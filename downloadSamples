@@ -1,0 +1,25 @@
+#!/bin/bash
+
+problem=$1
+url=https://open.kattis.com/problems/$problem/file/statement/samples.zip
+if [[ `wget -S --spider $url 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+    echo "Downloading samples."
+    if [[ $2 ]]; then
+        wget -nv -P $2 $url
+        echo "Download complete."
+        echo "Unzipping samples."
+        unzip $2/samples.zip -d $2/samples
+        echo "Samples unzipped. Deleting 'samples.zip'."
+        rm $2/samples.zip
+    else
+        wget -nv $url
+        echo "Download complete."
+        echo "Unzipping samples."
+        unzip samples.zip -d samples
+        echo "Samples unzipped. Deleting 'samples.zip'."
+        rm samples.zip
+    fi
+    echo "Done!"
+else
+    echo "Nothing to download. Check problem id or maybe there are no samples."
+fi

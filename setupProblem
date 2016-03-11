@@ -1,0 +1,22 @@
+#!/bin/bash
+
+language=$1
+filename=$2
+problem=`echo $filename | tr [:upper:] [:lower:]`
+
+if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
+    javaFilename="$filename.java"
+    directory=~/Projects/kattis/java/$problem
+    mkdir $directory
+    cd $directory
+    ../../downloadSamples $problem $directory
+    touch $javaFilename
+    cat >$javaFilename <<EOF
+import java.util.Scanner;
+public class ${filename} {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+    }
+}
+EOF
+fi
