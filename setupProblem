@@ -10,13 +10,7 @@ if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
     mkdir $directory
     cd $directory
     ../../downloadSamples $problem $directory
-    touch $javaFilename
-    cat >$javaFilename <<EOF
-import java.util.Scanner;
-public class ${filename} {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-    }
-}
-EOF
+    cp ../TEMPLATE.java $javaFilename
+    sed -i "s/\${filename}/$filename/g" $javaFilename
 fi
+
