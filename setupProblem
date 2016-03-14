@@ -5,15 +5,15 @@
 
 language=$1
 filename=$2
-problem=`echo $filename | tr [:upper:] [:lower:]`
+problem=$(echo "$filename" | tr "[:upper:]" "[:lower:]")
 
-if [ `echo $language | tr [:upper:] [:lower:]` == "java" ]; then
+if [ "$(echo "$language" | tr "[:upper:]" "[:lower:]")" == "java" ]; then
     javaFilename="$filename.java"
     directory=~/Projects/kattis/java/$problem
-    mkdir $directory
-    cd $directory
-    ../../downloadSamples $problem $directory
-    cp ../TEMPLATE.java $javaFilename
-    sed -i "s/\${filename}/$filename/g" $javaFilename
+    mkdir "$directory"
+    cd "$directory" || exit
+    ../../downloadSamples "$problem" "$directory"
+    cp ../TEMPLATE.java "$javaFilename"
+    sed -i "s/\${filename}/\"$filename\"/g" "$javaFilename"
 fi
 

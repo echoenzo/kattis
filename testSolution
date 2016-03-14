@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: echoenzo
+# Tests solution with name $filename against sample data downloaded from open.kattis.com
 
 filename=$1
 problem=$(echo "$filename" | tr "[:upper:]" "[:lower:]")
@@ -12,7 +14,7 @@ if [ -d ~/Projects/kattis/java/"$problem" ]; then
         for i in samples/*.in; do
             touch 'output'
             java "$filename" < "$i" > output
-            if [[ $(grep -Fxvf output samples/"${i:8:-3}".ans) ]]; then
+            if grep -Fqxvf output "${i:0:-3}".ans; then
                 echo 'TEST '${x}': FAIL'
             else
                 echo 'TEST '${x}': PASS'
