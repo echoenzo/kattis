@@ -1,4 +1,7 @@
 #!/bin/bash
+# Original credit: NLSteveO
+# Modified by echoenzo
+# Creates a directory and empty template for solving a problem on open.kattis.com
 
 language=$1
 filename=$2
