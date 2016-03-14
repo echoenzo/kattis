@@ -101,16 +101,14 @@ public class ${filename} {
             }
             return arr;
         }
-        int[] getIntArray(int s)
-        {
+        int[] getIntArray(int s) {
             int[] arr = new int[s];
             for (int d = 0; d < s; d++) {
                 arr[d] = in.nextInt();
             }
             return arr;
         }
-        char[][] getCharGrid()
-        {
+        char[][] getCharGrid() {
             ArrayList<char[]> lines = new ArrayList<char[]>();
             String line = in.nextLine();
             while (line != null && line.length() == 0) {
