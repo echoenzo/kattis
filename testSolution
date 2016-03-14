@@ -1,0 +1,28 @@
+#!/bin/bash
+
+filename=$1
+problem=$(echo "$filename" | tr "[:upper:]" "[:lower:]")
+
+if [ -d ~/Projects/kattis/java/"$problem" ]; then
+    directory=~/Projects/kattis/java/"$problem"
+    cd "$directory" || exit
+    javac ./*.java
+    if [ -d samples/ ]; then
+        x=1
+        for i in samples/*.in; do
+            touch 'output'
+            java "$filename" < "$i" > output
+            if [[ $(grep -Fxvf output samples/"${i:8:-3}".ans) ]]; then
+                echo 'TEST '${x}': FAIL'
+            else
+                echo 'TEST '${x}': PASS'
+            fi
+            rm output
+            x=$((x+1))
+        done
+    else
+        echo 'There are no sample files to test!'
+    fi
+else
+    echo 'No such file to test.'
+fi
