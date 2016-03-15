@@ -91,10 +91,6 @@ public class ${filename} {
             return true;
         }
 
-        int nextInt() {
-            return Integer.parseInt(next());
-        }
-
         double[] getDoubleArray(int s) {
             double[] arr = new double[s];
             for (int d = 0; d < s; d++) {
@@ -102,6 +98,7 @@ public class ${filename} {
             }
             return arr;
         }
+
         int[] getIntArray(int s) {
             int[] arr = new int[s];
             for (int d = 0; d < s; d++) {
@@ -109,6 +106,7 @@ public class ${filename} {
             }
             return arr;
         }
+
         char[][] getCharGrid() {
             ArrayList<char[]> lines = new ArrayList<char[]>();
             String line = in.nextLine();
@@ -127,7 +125,10 @@ public class ${filename} {
                 grid[l] = lines.get(l);
             }
             return grid;
+        }
 
+        int nextInt() {
+            return Integer.parseInt(next());
         }
 
         long nextLong() {
