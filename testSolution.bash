@@ -9,18 +9,27 @@ problem="${filename,,}"
 if [[ -d "$HOME/Projects/kattis/java/$problem" ]]; then
     directory="$HOME/Projects/kattis/java/$problem"
     cd "$directory" || exit 1
-    javac "./*.java"
-    if [ -d "samples/" ]; then
+    javac ./*.java
+    exit_status="$?"
+    if [[ "$exit_status" != 0 ]]; then
+        exit 1
+    elif [[ -d "samples/" ]]; then
         x=1
         for i in samples/*.in; do
             touch "output"
-            java "$filename" < "$i" > "output"
-            if grep -Fqxvf "output" "${i:0:-3}.ans"; then
+            touch "error"
+            java "$filename" < "$i" > "output" 2> "error"
+            exit_status="$?"
+            if [[ "$exit_status" != 0 ]]; then
+                cat "error"
+                echo "TEST ${x}: RUNTIME ERROR"
+            elif grep -Fqxvf "output" "${i:0:-3}.ans"; then
                 echo "TEST ${x}: FAIL"
             else
                 echo "TEST ${x}: PASS"
             fi
             rm "output"
+            rm "error"
             x=$((x+1))
         done
     else
