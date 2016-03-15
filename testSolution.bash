@@ -23,7 +23,7 @@ if [[ -d "$HOME/Projects/kattis/java/$problem" ]]; then
             if [[ "$exit_status" != 0 ]]; then
                 echo "TEST ${x}: RUNTIME ERROR"
                 cat "error"
-            elif grep -Fqxvf "output" "${i:0:-3}.ans"; then
+            elif ! cmp -s "output" "${i:0:-3}.ans"; then
                 echo "TEST ${x}: FAIL"
                 cat "output"
             else
