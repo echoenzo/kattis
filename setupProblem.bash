@@ -15,7 +15,7 @@ if [[ "${language,,}" == "java" ]]; then
     mkdir -p "$directory" || exit 1
     cp "$HOME/Projects/kattis/java/TEMPLATE.java" "$directory/$javaFilename"
     sed -i "s/\${filename}/$filename/g" "$directory/$javaFilename"
-    "$HOME/Projects/kattis/downloadSamples" "$problem" "$directory"
+    "$HOME/Projects/kattis/downloadSamples.bash" "$problem" "$directory"
 else
     echo "Language not supported."
     exit 1
