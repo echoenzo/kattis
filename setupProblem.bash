@@ -9,7 +9,7 @@ language="$1"
 filename="$2"
 problem="${filename,,}"
 
-if [[ "${language,,})" == "java" ]]; then
+if [[ "${language,,}" == "java" ]]; then
     javaFilename="$filename.java"
     directory="$HOME/Projects/kattis/java/$problem"
     mkdir -p "$directory" || exit 1
