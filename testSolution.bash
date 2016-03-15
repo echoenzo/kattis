@@ -21,10 +21,11 @@ if [[ -d "$HOME/Projects/kattis/java/$problem" ]]; then
             java "$filename" < "$i" > "output" 2> "error"
             exit_status="$?"
             if [[ "$exit_status" != 0 ]]; then
-                cat "error"
                 echo "TEST ${x}: RUNTIME ERROR"
+                cat "error"
             elif grep -Fqxvf "output" "${i:0:-3}.ans"; then
                 echo "TEST ${x}: FAIL"
+                cat "output"
             else
                 echo "TEST ${x}: PASS"
             fi
