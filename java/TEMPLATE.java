@@ -1,5 +1,6 @@
-// Template Author: Michael-G-Sullivan
-// Author: echoenzo
+/** Solution for kattis problem
+ * @author: echoenzo
+ */
 import java.io.*;
 import java.util.*;
 
@@ -26,9 +27,7 @@ public class ${filename} {
     }
 
     /** Simple yet moderately fast I/O routines.
-     *
      * @author: Kattis
-     *
      */
     class Kattio extends PrintWriter {
 
