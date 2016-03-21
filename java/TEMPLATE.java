@@ -5,8 +5,7 @@ import java.util.*;
 
 public class ${filename} {
 
-    FastScanner in;
-    PrintWriter out;
+    Kattio io;
     int i = 0, j = 0;
 
     void solve() {
@@ -20,123 +19,97 @@ public class ${filename} {
     }
 
     void runIO() {
-        in = new FastScanner(System.in);
-        out = new PrintWriter(System.out);
+        io = new Kattio(System.in, System.out);
+        debug = new Kattio(System.in, Sytsem.err);
         solve();
-        out.close();
+        io.close();
     }
 
-    void printGrid(char[][] g) {
-        for (int a = 0; a < g.length; a++) {
-            out.println(new String(g[a]));
+    /** Simple yet moderately fast I/O routines.
+     *
+     * @author: Kattis
+     *
+     */
+    class Kattio extends PrintWriter {
+
+        public Kattio(InputStream i) {
+            super(new BufferedOutputStream(System.out));
+            r = new BufferedReader(new InputStreamReader(i));
         }
-    }
-
-    class FastScanner {
-        BufferedReader br;
-        StringTokenizer st;
-
-        public FastScanner(File f) {
-            try {
-                br = new BufferedReader(new FileReader(f));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        public Kattio(InputStream i, OutputStream o) {
+            super(new BufferedOutputStream(o));
+            r = new BufferedReader(new InputStreamReader(i));
         }
 
-        public FastScanner(InputStream f) {
-            br = new BufferedReader(new InputStreamReader(f));
+        public boolean hasMoreTokens() {
+            return peekToken() != null;
         }
 
-        String next() {
-            while (st == null || !st.hasMoreTokens()) {
-                String s = null;
-                try {
-                    s = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (s == null)
-                    return null;
-                st = new StringTokenizer(s);
-            }
-            return st.nextToken();
+        public int getInt() {
+            return Integer.parseInt(nextToken());
         }
 
-        //This will empty out the current line (if non-empty) and return the next line down. If the next line is empty, will return the empty string.
-        //If there is no more input, this will return null.
-        String nextLine() {
-            st = null;
-            String s = null;
-            try {
-                s = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return s;
+        public double getDouble() {
+            return Double.parseDouble(nextToken());
         }
 
-        boolean hasMoreTokens() {
-            while (st == null || !st.hasMoreTokens()) {
-                String s = null;
-                try {
-                    s = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (s == null)
-                    return false;
-                st = new StringTokenizer(s);
-            }
-            return true;
+        public long getLong() {
+            return Long.parseLong(nextToken());
         }
 
-        double[] getDoubleArray(int s) {
-            double[] arr = new double[s];
-            for (int d = 0; d < s; d++) {
-                arr[d] = in.nextDouble();
-            }
-            return arr;
+        public String getWord() {
+            return nextToken();
         }
 
-        int[] getIntArray(int s) {
-            int[] arr = new int[s];
-            for (int d = 0; d < s; d++) {
-                arr[d] = in.nextInt();
-            }
-            return arr;
-        }
-
-        char[][] getCharGrid() {
+        public char[][] getCharGrid() {
             ArrayList<char[]> lines = new ArrayList<char[]>();
-            String line = in.nextLine();
-            while (line != null && line.length() == 0) {
-                line = in.nextLine();
+            String l = line;
+            while (l != null && l.length() == 0) {
+                l = r.readLine();
             }
-            if (line == null) {
-                return null;
-            }
-            while (line != null && line.length() > 0) {
-                lines.add(line.toCharArray());
-                line = in.nextLine();
+            if (l == null) return null;
+            while (l != null && l.length() > 0) {
+                lines.add(l.toCharArray());
+                l = r.readLine();
             }
             char[][] grid = new char[lines.size()][];
-            for (int l = 0; l < grid.length; l++) {
-                grid[l] = lines.get(l);
+            for (int row = 0; row < grid.length; row++) {
+                grid[row] = lines.get(row);
             }
+            line = null;
+            st = null;
+            token = null;
             return grid;
         }
 
-        int nextInt() {
-            return Integer.parseInt(next());
+        public void printGrid(char[][] g) {
+            for (int a = 0; a < g.length; a++) {
+                println(new String(g[a]));
+            }
         }
 
-        long nextLong() {
-            return Long.parseLong(next());
+        private BufferedReader r;
+        private String line;
+        private StringTokenizer st;
+        private String token;
+
+        private String peekToken() {
+            if (token == null) try {
+                while (st == null || !st.hasMoreTokens()) {
+                    line = r.readLine();
+                    if (line == null) return null;
+                    st = new StringTokenizer(line);
+                }
+                token = st.nextToken();
+            } catch (IOException e) { e.printStackTrace(); }
+            return token;
         }
 
-        double nextDouble() {
-            return Double.parseDouble(next());
+        private String nextToken() {
+            String ans = peekToken();
+            token = null;
+            return ans;
         }
+
     }
 }
