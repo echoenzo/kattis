@@ -65,12 +65,16 @@ public class ${filename} {
             ArrayList<char[]> lines = new ArrayList<char[]>();
             String l = line;
             while (l != null && l.length() == 0) {
-                l = r.readLine();
+                try {
+                    l = r.readLine();
+                } catch(IOException e) { e.printStackTrace(); }
             }
             if (l == null) return null;
             while (l != null && l.length() > 0) {
                 lines.add(l.toCharArray());
-                l = r.readLine();
+                try {
+                    l = r.readLine();
+                } catch(IOException e) { e.printStackTrace(); }
             }
             char[][] grid = new char[lines.size()][];
             for (int row = 0; row < grid.length; row++) {
