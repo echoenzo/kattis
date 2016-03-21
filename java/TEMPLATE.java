@@ -63,26 +63,18 @@ public class ${filename} {
 
         public char[][] getCharGrid() {
             ArrayList<char[]> lines = new ArrayList<char[]>();
-            String l = line;
-            while (l != null && l.length() == 0) {
-                try {
-                    l = r.readLine();
-                } catch(IOException e) { e.printStackTrace(); }
-            }
-            if (l == null) return null;
-            while (l != null && l.length() > 0) {
-                lines.add(l.toCharArray());
-                try {
-                    l = r.readLine();
-                } catch(IOException e) { e.printStackTrace(); }
+            String ans = peekToken();
+            token = null;
+            if (ans == null) return null;
+            while (ans != null && ans.length() > 0) {
+                lines.add(ans.toCharArray());
+                ans = peekToken();
+                token = null;
             }
             char[][] grid = new char[lines.size()][];
             for (int row = 0; row < grid.length; row++) {
                 grid[row] = lines.get(row);
             }
-            line = null;
-            st = null;
-            token = null;
             return grid;
         }
 
