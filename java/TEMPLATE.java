@@ -7,6 +7,7 @@ import java.util.*;
 public class ${filename} {
 
     Kattio io;
+    Kattio debug;
     int i = 0, j = 0;
 
     void solve() {
@@ -21,7 +22,7 @@ public class ${filename} {
 
     void runIO() {
         io = new Kattio(System.in, System.out);
-        debug = new Kattio(System.in, Sytsem.err);
+        debug = new Kattio(System.in, System.err);
         solve();
         io.close();
     }
