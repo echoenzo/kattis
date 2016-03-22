@@ -22,9 +22,13 @@ if [[ -d "$HOME/Projects/kattis/java/$problem" ]]; then
             exit_status="$?"
             if [[ "$exit_status" != 0 ]]; then
                 echo "TEST ${x}: RUNTIME ERROR"
+                echo "System.err:"
                 cat "error"
             elif ! cmp -s "output" "${i:0:-3}.ans"; then
                 echo "TEST ${x}: FAIL"
+                echo "System.err:"
+                cat "error"
+                echo "System.out:"
                 cat "output"
             else
                 echo "TEST ${x}: PASS"
