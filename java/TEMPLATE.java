@@ -25,6 +25,7 @@ public class ${filename} {
         debug = new Kattio(System.in, System.err);
         solve();
         io.close();
+        debug.close();
     }
 
     /** Simple yet moderately fast I/O routines.
