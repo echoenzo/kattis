@@ -62,15 +62,14 @@ public class ${filename} {
             return nextToken();
         }
 
+        // returns a character grid of the next lines of input, until EOF or empty line.
         public char[][] getCharGrid() {
             ArrayList<char[]> lines = new ArrayList<char[]>();
-            String ans = peekToken();
-            token = null;
+            String ans = nextLine();
             if (ans == null) return null;
             while (ans != null && ans.length() > 0) {
                 lines.add(ans.toCharArray());
-                ans = peekToken();
-                token = null;
+                ans = nextLine();
             }
             char[][] grid = new char[lines.size()][];
             for (int row = 0; row < grid.length; row++) {
@@ -108,5 +107,15 @@ public class ${filename} {
             return ans;
         }
 
+        public String nextLine() {
+            st = null;
+            String s = null;
+            try {
+                s = r.readLine();
+            } catch (IOException e) { e.printStackTrace(); }
+            return s;
+        }
+
     }
+
 }
